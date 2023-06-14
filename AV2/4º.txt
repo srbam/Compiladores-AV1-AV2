@@ -1,0 +1,3 @@
+Um analisador semântico em compiladores verifica a consistência semântica do código-fonte, garantindo que as operações e expressões sejam usadas com os tipos corretos que as variáveis sejam declaradas e usadas corretamente, evitando erros relacionados a incompatibilidade de tipos, que as funções sejam chamadas corretamente, entre outras verificações. 
+Ele também pode gerar um código intermediário. Esse código intermediário é usado nas etapas subsequentes do processo de compilação.
+O analisador semântico garante a conformidade do programa com as regras da linguagem de programação.

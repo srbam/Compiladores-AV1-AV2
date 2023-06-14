@@ -1,0 +1,5 @@
+Umas das principais vantagens da Forma Backus Naur (BNF): 
+Ela evita ambiguidades e inconsistências na Linguagem;
+É simples e fácil de entender o que a torna clara;
+Serve como uma boa base para se criar um analisador sintático de um compilador, oque facilita na hora de criar um compilador;
+Também permite uma fácil manutenção do compilador.
