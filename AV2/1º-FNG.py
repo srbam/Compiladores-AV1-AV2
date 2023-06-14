@@ -25,7 +25,7 @@ def rename_nonterminals(grammar):
         grammar[renamed_nonterminals[nonterminal]] = new_productions
         del grammar[nonterminal]
 
-def printProductions(grammar):
+def print_productions(grammar):
     print('')
     for nonterminal, productions in grammar.items():
         print(f"{nonterminal} -> ", end='')
@@ -37,7 +37,7 @@ def printProductions(grammar):
         print()
     
 
-def removeEmptyProductions(grammar):
+def remove_empty_productions(grammar):
     for nonterminal, productions in grammar.items():
         grammar[nonterminal] = [production for production in productions if production != 'λ']
 
@@ -47,8 +47,8 @@ grammar = {
     'B': ['Ac', 'a'],
 }
 
-removeEmptyProductions(grammar)
+remove_empty_productions(grammar)
 #rename_nonterminals(grammar)
-printProductions(grammar)
+print_productions(grammar)
 
 
