@@ -1,5 +1,4 @@
 def rename_nonterminals(grammar):
-    print('')
     print('Renomeando os não terminais:')
     nonterminals = list(grammar.keys())
     renamed_nonterminals = {}
@@ -38,9 +37,9 @@ def print_productions(grammar):
             else:
                 print(production + ' | ', end='')
         print()
+    print('')
     
 def remove_empty_productions(grammar):
-    print('')
     print('Removendo λ:')
     for nonterminal, productions in grammar.items():
         grammar[nonterminal] = [production for production in productions if production != 'λ']
@@ -71,7 +70,6 @@ def eliminate_empty_productions(nonterminalTarget):
         
 
 def have_any_unitary_prod(grammar):
-    print('')
     print('Removendo produções unitárias:')
     for non_terminal, productions in grammar.items():
         for production in productions:
@@ -85,7 +83,37 @@ def have_any_unitary_prod(grammar):
                 del grammar[non_terminal][index]
     print_productions(grammar)
 
+def eliminate_left_recursion(grammar):
+    next_number = 4
+    print('Eliminando Produções com número maior que as variáveis que as produzem: ')
 
+    for non_terminal, productions in grammar.items():
+        for i, production in enumerate(productions):
+            if production[0] == 'A' and production[1] < non_terminal[1]:
+                temp = str(production[0]) + str(production[1])
+                #print(temp)
+                productionsKey = grammar[temp]
+                if len(productionsKey) > 0:
+                    productions[i] = production.replace(temp, productionsKey[0])
+    
+    print_productions(grammar)
+    print('Eliminando Recursões a esquerda')
+
+    grammar_copy = grammar.copy()
+    for non_terminal, productions in grammar_copy.items():
+        for i, production in enumerate(productions):
+            if production[0] == 'A':
+                temp = str(production[0]) + str(production[1])
+                if temp == non_terminal:
+                    del grammar[non_terminal][0]
+                    grammar[non_terminal].append(str(grammar[non_terminal][0])+ 'B' + str(production[1]))
+                    grammar[non_terminal].append(str(grammar[non_terminal][1])+ 'B' + str(production[1]))
+                    grammar['B' + str(production[1])] = [str(production[2]) + str(production[3]), str(production[2]) + str(production[3]) + 'B' + str(production[1])]
+                    next_number += 1
+                    #grammar[non_terminal][i] = production
+                
+    print_productions(grammar)
+    grammar.update(grammar_copy)
 
 grammar = {
     'S': ['aAd', 'A'],
@@ -96,8 +124,8 @@ grammar = {
 lambda_location()
 remove_empty_productions(grammar)
 have_any_unitary_prod(grammar)
-
 rename_nonterminals(grammar)
-#print(encontrar_nao_terminais_lambda(grammar))
+
+eliminate_left_recursion(grammar)
 #print_productions(grammar)
 
