@@ -1,3 +1,15 @@
+def print_productions(grammar):
+    print('')
+    for nonterminal, productions in grammar.items():
+        print(f"{nonterminal} -> ", end='')
+        for i, production in enumerate(productions):
+            if i == len(productions) - 1:
+                print(f'{production}', end='')
+            else:
+                print(production + ' | ', end='')
+        print()
+    print('')
+
 def rename_nonterminals(grammar):
     print('Renomeando os não terminais:')
     nonterminals = list(grammar.keys())
@@ -26,18 +38,6 @@ def rename_nonterminals(grammar):
         grammar[renamed_nonterminals[nonterminal]] = new_productions
         del grammar[nonterminal]
     print_productions(grammar)
-
-def print_productions(grammar):
-    print('')
-    for nonterminal, productions in grammar.items():
-        print(f"{nonterminal} -> ", end='')
-        for i, production in enumerate(productions):
-            if i == len(productions) - 1:
-                print(f'{production}', end='')
-            else:
-                print(production + ' | ', end='')
-        print()
-    print('')
     
 def remove_empty_productions(grammar):
     print('Removendo λ:')
