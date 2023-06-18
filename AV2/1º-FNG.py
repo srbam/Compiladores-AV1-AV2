@@ -97,7 +97,7 @@ def eliminate_left_recursion(grammar):
                     productions[i] = production.replace(temp, productionsKey[0])
     
     print_productions(grammar)
-    print('Eliminando Recursões a esquerda')
+    print('Eliminando Recursões a esquerda:')
 
     grammar_copy = grammar.copy()
     for non_terminal, productions in grammar_copy.items():
@@ -116,7 +116,7 @@ def eliminate_left_recursion(grammar):
     grammar.update(grammar_copy)
 
 def start_with_terminal():
-    print('Garantindo que o lado esquerdo comece com um terminal')
+    print('Eliminando variáveis a esquerda:')
     grammar_copy = grammar.copy()
     for non_terminal, productions in grammar_copy.items():
         for i, production in enumerate(productions):
