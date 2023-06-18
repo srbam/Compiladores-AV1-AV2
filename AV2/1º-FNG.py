@@ -115,6 +115,20 @@ def eliminate_left_recursion(grammar):
     print_productions(grammar)
     grammar.update(grammar_copy)
 
+def start_with_terminal():
+    print('Garantindo que o lado esquerdo comece com um terminal')
+    grammar_copy = grammar.copy()
+    for non_terminal, productions in grammar_copy.items():
+        for i, production in enumerate(productions):
+            if production == 'A3c':
+                del grammar[non_terminal][i]
+                for key, value in grammar.items():
+                    if key == 'A3':
+                        for prod in value:
+                            grammar[non_terminal].insert(i, prod + 'c')
+                            i += 1
+    print_productions(grammar)
+
 grammar = {
     'S': ['aAd', 'A'],
     'A': ['Bc', 'λ'],
@@ -125,7 +139,7 @@ lambda_location()
 remove_empty_productions(grammar)
 have_any_unitary_prod(grammar)
 rename_nonterminals(grammar)
-
 eliminate_left_recursion(grammar)
+start_with_terminal()
 #print_productions(grammar)
 
